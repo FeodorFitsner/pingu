@@ -47,7 +47,7 @@ build_script:
   - ps: |
       # Build Pingu
       Push-Location .\src\Pingu
-      dotnet build -c Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.V14.dll"
+      dotnet build -c Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
       Pop-Location
 before_test:
   - ps: |
