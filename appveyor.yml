@@ -1,4 +1,4 @@
-os: Visual Studio 2015
+os: Visual Studio 2017 RC
 version: "{build}"
 environment:
   DOTNET_SDK_BINARIES_DOWNLOAD: "https://download.microsoft.com/download/7/E/8/7E8BD9BD-2892-4848-BA01-76493DECC138/dotnet-dev-win-x64.1.0.0-preview4-004233.zip"
@@ -9,16 +9,7 @@ environment:
     secure: rXQYRJDH6xRwjKr+wood5fZ4VnA8MSej+rFO1j7+2rf2aJwTmwma9t+Xqwf/AoVZ
 install:
   - ps: |
-      # Download .NET Core SDK Preview 4
-      if (!(Test-Path $env:DOTNET_INSTALL_DIR)) {
-        $tempFile = [System.IO.Path]::GetTempFileName()
-        (New-Object System.Net.WebClient).DownloadFile($env:DOTNET_SDK_BINARIES_DOWNLOAD, $tempFile)
-        $targetPath = Join-Path $pwd $env:DOTNET_INSTALL_DIR
-        Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory($tempFile, $targetPath)
-        $env:Path = "$targetPath;$env:Path"
-        Remove-Item $tempFile
-        dotnet --info
-      }
+      dotnet --info
   - ps: |
       # Compute version number
       $pinguVersion = Get-Content $env:PINGU_VERSION_FILE
